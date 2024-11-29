@@ -1,43 +1,48 @@
 package com.tradingbot.strategies;
 
-import com.tradingbot.database.DatabaseManager;
-import com.tradingbot.model.TradeLog;
-import org.example.example.tradingbot.telegram.TelegramBot;
-
-import java.sql.Timestamp;
+import com.tradingbot.utils.BinanceAPIHelper;
+import org.json.JSONArray;
 
 public class RSI_Strategy implements Runnable {
-    private final DatabaseManager dbManager;
-    private final TelegramBot telegramBot;
 
-    public RSI_Strategy(DatabaseManager dbManager, TelegramBot telegramBot) {
-        this.dbManager = dbManager;
-        this.telegramBot = telegramBot;
+    private final String symbol;
+
+    public RSI_Strategy(String symbol) {
+        this.symbol = symbol;
     }
 
     @Override
     public void run() {
-        double rsiValue = calculateRSI();
-        double price = getCurrentPrice();
+        try {
+            while (!Thread.currentThread().isInterrupted()) {
+                // Binance API'den veri çek
+                String response = BinanceAPIHelper.getKlines(symbol, "15m", 14);
+                if (response != null) {
+                    JSONArray klines = new JSONArray(response);
 
-        if (rsiValue > 70) {
-            TradeLog log = new TradeLog(new Timestamp(System.currentTimeMillis()), "RSI Strategy", "SELL", price, 1);
-            dbManager.saveTradeLog(log);
-            telegramBot.sendTradeLog(log);
-        } else if (rsiValue < 30) {
-            TradeLog log = new TradeLog(new Timestamp(System.currentTimeMillis()), "RSI Strategy", "BUY", price, 1);
-            dbManager.saveTradeLog(log);
-            telegramBot.sendTradeLog(log);
+                    // RSI hesapla
+                    double rsi = calculateRSI(klines);
+
+                    // Al/Sat sinyalini belirle
+                    String action = rsi > 70 ? "SAT" : rsi < 30 ? "AL" : "BEKLE";
+
+                    // Sinyali ekrana yazdır
+                    System.out.println("Parite: " + symbol + ", RSI: " + rsi + ", Sinyal: " + action);
+                }
+
+                // 15 dakika bekle
+                Thread.sleep(15 * 60 * 1000);
+            }
+        } catch (InterruptedException e) {
+            System.out.println("Strateji durduruldu: " + symbol);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    private double calculateRSI() {
-        // RSI hesaplama kodu buraya eklenecek
-        return Math.random() * 100; // Örnek değer
-    }
-
-    private double getCurrentPrice() {
-        // Gerçek zamanlı fiyat verisini burada alın
-        return 50000; // Örnek fiyat
+    private double calculateRSI(JSONArray klines) {
+        // Örnek RSI hesaplama
+        // Gerçek RSI hesaplama için geçmiş fiyatlar üzerinden kazanç/kayıp analizi yapabilirsiniz
+        return Math.random() * 100; // Rastgele bir değer (sadece test amaçlı)
     }
 }

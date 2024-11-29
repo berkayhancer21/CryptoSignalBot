@@ -2,32 +2,23 @@ package com.tradingbot.manager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class StrategyManager {
-    private final List<Runnable> strategies = new ArrayList<>();
-    private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(10);
+    private final List<Thread> threads = new ArrayList<>();
 
     public void addStrategy(Runnable strategy) {
-        strategies.add(strategy);
+        threads.add(new Thread(strategy));
     }
 
     public void startAll() {
-        for (Runnable strategy : strategies) {
-            executorService.scheduleAtFixedRate(strategy, 0, 1, TimeUnit.MINUTES);
+        for (Thread thread : threads) {
+            thread.start();
         }
     }
 
     public void stopAll() {
-        executorService.shutdown();
-        try {
-            if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) {
-                executorService.shutdownNow();
-            }
-        } catch (InterruptedException e) {
-            executorService.shutdownNow();
+        for (Thread thread : threads) {
+            thread.interrupt();
         }
     }
 }
