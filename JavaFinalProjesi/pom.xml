@@ -36,6 +36,14 @@
             <version>20210307</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>3.3.3</version>
+        </dependency>
+
+
 
         <!-- https://mvnrepository.com/artifact/org.telegram/telegrambots -->
         <dependency>
@@ -45,6 +53,8 @@
         </dependency>
 
     </dependencies>
+
+
 
     <build>
         <plugins>

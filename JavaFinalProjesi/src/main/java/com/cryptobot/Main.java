@@ -17,9 +17,12 @@ public class Main {
         TelegramConfig telegramBot = new TelegramConfig();
 
         // İzlenecek pariteler
-        List<String> symbols = Arrays.asList("RENDERUSDT","AVAXUSDT","XRPUSDT","ARKMUSDT","BTCUSDT","BCHUSDT","FETUSDT","IDUSDT","FLOKIUSDT"); // Örnek pariteler
+        List<String> symbols = Arrays.asList("RENDERUSDT", "AVAXUSDT", "XRPUSDT", "ARKMUSDT", "BTCUSDT", "BCHUSDT", "FETUSDT", "IDUSDT", "FLOKIUSDT"); // Örnek pariteler
         String interval = "1h"; // 1 saatlik zaman aralığı
         int limit = 1000;
+
+        // MariaDB bağlantısını başlat
+        MariadbConfig dbConfig = new MariadbConfig();
 
         // Parite stratejilerini almak için PariteYonetimi'ni kullan
         for (String symbol : symbols) {
@@ -43,6 +46,14 @@ public class Main {
 
                 // Telegram'a gönder
                 telegramBot.sendToTelegram(result);
+
+                // Veritabanına ekle
+                for (Map.Entry<String, String> entry : strategies.entrySet()) {
+                    String strategyName = entry.getKey();
+                    String signalType = entry.getValue();
+                    dbConfig.insertLog(symbol, strategyName, signalType);
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
