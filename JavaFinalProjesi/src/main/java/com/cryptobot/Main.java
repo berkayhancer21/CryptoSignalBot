@@ -18,7 +18,7 @@ public class Main {
 
         // İzlenecek pariteler
         List<String> symbols = Arrays.asList("RENDERUSDT","AVAXUSDT","XRPUSDT","ARKMUSDT","BTCUSDT","BCHUSDT","FETUSDT","IDUSDT","FLOKIUSDT"); // Örnek pariteler
-        String interval = "15m"; // 15 dakikalık zaman aralığı
+        String interval = "1h"; // 1 saatlik zaman aralığı
         int limit = 1000;
 
         // Parite stratejilerini almak için PariteYonetimi'ni kullan
