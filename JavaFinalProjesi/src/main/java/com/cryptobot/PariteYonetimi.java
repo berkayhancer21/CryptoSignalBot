@@ -13,10 +13,11 @@ public class PariteYonetimi {
             String marketData = apiClient.getMarketData(symbol, interval, limit);
 
             // Market verisini işlemeye gönder
-            List<Double> closePrices = Config.processMarketData(marketData);
-            List<Double> highPrices = Config.processHighPrices(marketData);
-            List<Double> lowPrices = Config.processLowPrices(marketData);
+            List<Double> closePrices = BinanceConfig.processClosePrices(marketData);
+            List<Double> highPrices = BinanceConfig.processHighPrices(marketData);
+            List<Double> lowPrices = BinanceConfig.processLowPrices(marketData);
 
+            // Kapanış fiyatları boşsa
             if (closePrices.isEmpty()) {
                 System.out.println(symbol + " için kapanış fiyatları boş.");
                 Map<String, String> emptyStrategies = new HashMap<>();
@@ -25,7 +26,7 @@ public class PariteYonetimi {
                 emptyStrategies.put("Momentum_Stratejisi", "NONE");
                 emptyStrategies.put("RSI_Stratejisi", "NONE");
                 emptyStrategies.put("Stochastic_Stratejisi", "NONE");
-                emptyStrategies.put("BollingerBands_StochasticRSI_Stratejisi", "NONE"); // Yeni strateji ekledim
+                emptyStrategies.put("BollingerBands_StochasticRSI_Stratejisi", "NONE");
                 strategyResults.put(symbol, emptyStrategies);
                 return strategyResults;
             }

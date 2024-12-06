@@ -9,6 +9,7 @@ public class BinanceAPIClient {
 
     private SpotClient client;
 
+    // Binance API istemcisini oluştur
     public BinanceAPIClient(String apiKey, String secretKey) {
         Map<String, String> config = new HashMap<>();
         config.put("API_KEY", apiKey);
@@ -18,7 +19,6 @@ public class BinanceAPIClient {
 
     // Parite verilerini al (OHLCV)
     public String getMarketData(String symbol, String interval, int limit) {
-        String endpoint = "/api/v3/klines";
         Map<String, Object> params = new HashMap<>();
         params.put("symbol", symbol);
         params.put("interval", interval);

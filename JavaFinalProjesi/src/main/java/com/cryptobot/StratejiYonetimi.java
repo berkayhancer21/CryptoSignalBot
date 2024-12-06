@@ -1,6 +1,6 @@
 package com.cryptobot;
 
-import com.cryptobot.stratejiler.BollingerBands_StochasticRSI_stratejisi; // Add import for BollingerBands_StochasticRSI_stratejisi
+import com.cryptobot.stratejiler.BollingerBands_StochasticRSI_stratejisi;
 import com.cryptobot.stratejiler.EMA9_EMA21_stratejisi;
 import com.cryptobot.stratejiler.MACD_EMA_stratejisi;
 import com.cryptobot.stratejiler.Momentum_stratejisi;
@@ -12,12 +12,12 @@ import java.util.concurrent.*;
 
 public class StratejiYonetimi {
 
-    // Kapanış fiyatları, yüksek fiyatlar ve düşük fiyatlar üzerinden stratejileri çalıştırır
     public static Map<String, String> calistirStratejiler(List<Double> closePrices, List<Double> highPrices, List<Double> lowPrices) throws InterruptedException, ExecutionException {
+        // Strateji sonuçlarını tutacak map
         Map<String, String> strategies = new HashMap<>();
 
-        // Stratejiler için thread havuzu oluştur
-        ExecutorService strategyExecutor = Executors.newFixedThreadPool(7); // 7 strateji için thread havuzu (RSI_MACD eklenmiş)
+        // Strateji çalıştırma işlemleri için ExecutorService ve Future listesi oluştur
+        ExecutorService strategyExecutor = Executors.newFixedThreadPool(7);
         List<Future<String>> strategyFutures = new ArrayList<>();
 
         // EMA9_EMA21 Stratejisi
@@ -47,16 +47,14 @@ public class StratejiYonetimi {
 
         // Stochastic Stratejisi
         strategyFutures.add(strategyExecutor.submit(() -> {
-            String stochasticSignal = Stochastic_stratejisi.generateSignal(closePrices, highPrices, lowPrices);
-            return stochasticSignal;
+            double stochasticDegeri = Stochastic_stratejisi.calculateStochastic(closePrices, highPrices, lowPrices, 14);
+            return Stochastic_stratejisi.generateSignal(stochasticDegeri);
         }));
 
         // BollingerBands_StochasticRSI Stratejisi
         strategyFutures.add(strategyExecutor.submit(() -> {
-            String bollingerStochRSISignal = BollingerBands_StochasticRSI_stratejisi.generateSignal(closePrices, 20, 2.0, 14); // Parametreleri kendinize göre ayarlayın
-            return bollingerStochRSISignal;
+            return BollingerBands_StochasticRSI_stratejisi.generateSignal(closePrices, 20, 2.0, 14);
         }));
-
 
         // Sonuçları birleştir
         strategies.put("EMA9_EMA21_Stratejisi", strategyFutures.get(0).get());
@@ -65,7 +63,6 @@ public class StratejiYonetimi {
         strategies.put("RSI_Stratejisi", strategyFutures.get(3).get());
         strategies.put("Stochastic_Stratejisi", strategyFutures.get(4).get());
         strategies.put("BollingerBands_StochasticRSI_Stratejisi", strategyFutures.get(5).get());
-
 
         strategyExecutor.shutdown();
         return strategies;

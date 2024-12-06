@@ -6,14 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class Config {
+public class BinanceConfig {
     private Properties properties;
 
-    public Config() {
+    // application.properties dosyasını oku
+    public BinanceConfig() {
         properties = new Properties();
         try (InputStream input = getClass().getClassLoader().getResourceAsStream("application.properties")) {
             if (input == null) {
-                System.out.println("Sorry, unable to find application.properties");
+                System.out.println("application.properties bulunamadı!");
                 return;
             }
             properties.load(input);
@@ -23,7 +24,7 @@ public class Config {
     }
 
     // Market verisini işleyip kapanış fiyatlarını döndüren fonksiyon
-    public static List<Double> processMarketData(String marketData) {
+    public static List<Double> processClosePrices(String marketData) {
         List<Double> closePrices = new ArrayList<>();
 
         try {

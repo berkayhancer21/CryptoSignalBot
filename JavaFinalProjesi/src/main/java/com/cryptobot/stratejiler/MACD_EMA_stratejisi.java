@@ -38,15 +38,14 @@ public class MACD_EMA_stratejisi {
         // Signal hattı: MACD hattının EMA'sı
         List<Double> signalLine = calculateEMA(macdLine, signalPeriod);
 
-        // Sonuçları döndür
-        Map<String, List<Double>> macdData = new HashMap<>();
-        macdData.put("macdLine", macdLine);
-        macdData.put("signalLine", signalLine);
+        Map<String, List<Double>> macdData = new HashMap<>(); // MACD ve Signal hattı verilerini içeren bir Map
+        macdData.put("macdLine", macdLine); // MACD hattı map'e eklendi
+        macdData.put("signalLine", signalLine); // Signal hattı map'e eklendi
 
         return macdData;
     }
 
-    // MACD sinyali oluşturma fonksiyonu
+    // MACD-EMA stratejisi sinyal üretimi fonksiyonu
     public static String generateSignal(Map<String, List<Double>> macdData) {
         List<Double> macdLine = macdData.get("macdLine");
         List<Double> signalLine = macdData.get("signalLine");

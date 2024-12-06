@@ -4,38 +4,38 @@ import java.util.List;
 
 public class RSI_stratejisi {
 
-    // RSI hesaplama (Örnek olarak 14 periyot)
-    public static double calculateRSI(List<Double> fiyatlar, int periyot) {
-        double kar = 0;
-        double zarar = 0;
+    // RSI hesaplama fonksiyonu
+    public static double calculateRSI(List<Double> prices, int period) {
+        double gain = 0;
+        double loss = 0;
 
-        for (int i = 1; i < periyot; i++) {
-            double degisim = fiyatlar.get(i) - fiyatlar.get(i - 1);
-            if (degisim > 0) {
-                kar += degisim;
+        for (int i = 1; i < period; i++) {
+            double change = prices.get(i) - prices.get(i - 1);
+            if (change > 0) {
+                gain += change;
             } else {
-                zarar -= degisim;
+                loss -= change;
             }
         }
 
-        double ortKar = kar / periyot;
-        double ortZarar = zarar / periyot;
+        double avgGain = gain / period;
+        double avgLoss = loss / period;
 
-        if (ortZarar == 0) {
+        if (avgLoss == 0) {
             return 100; // Hareketsiz piyasa
         }
 
-        double rs = ortKar / ortZarar;
+        double rs = avgGain / avgLoss;
         return 100 - (100 / (1 + rs));
     }
 
-    // AL/SAT sinyali üret
-    public static String generateSignal(double rsiDegeri) {
-        if (rsiDegeri > 70) {
-            return "SAT";
-        } else if (rsiDegeri < 30) {
-            return "AL";
+    // RSI stratejisi sinyal üretme fonksiyonu
+    public static String generateSignal(double rsiValue) {
+        if (rsiValue > 70) {
+            return "SAT"; // Satış Sinyali
+        } else if (rsiValue < 30) {
+            return "AL"; // Satın Alma Sinyali
         }
-        return "NONE";
+        return "NONE"; // Bu şartların sağlanmadığı bölgede (30 < rsiDegeri < 70)
     }
 }

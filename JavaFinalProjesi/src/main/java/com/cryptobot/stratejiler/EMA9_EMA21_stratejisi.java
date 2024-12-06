@@ -5,7 +5,7 @@ import java.util.List;
 
 public class EMA9_EMA21_stratejisi {
 
-    // EMA hesaplama
+    // EMA hesaplama fonksiyonu
     public static List<Double> calculateEMA(List<Double> fiyatlar, int periyot) {
         List<Double> emaDegerleri = new ArrayList<>();
         double carpim = 2.0 / (periyot + 1);
@@ -22,17 +22,17 @@ public class EMA9_EMA21_stratejisi {
         return emaDegerleri;
     }
 
-    // AL/SAT sinyali üret
+    // EMA stratejisi sinyal üretimi fonksiyonu
     public static String generateSignal(List<Double> kisaEMA, List<Double> uzunEMA) {
-        String sinyal = "NONE";
+        String sinyal = "NONE"; // Başlangıçta sinyal yok
         int sonIndeks = kisaEMA.size() - 1;
         double kisaEMASon = kisaEMA.get(sonIndeks);
         double uzunEMASon = uzunEMA.get(sonIndeks);
 
         if (kisaEMASon > uzunEMASon) {
-            sinyal = "AL";
+            sinyal = "AL"; // Kısa EMA, uzun EMA'yı yukarı kesiyor
         } else if (kisaEMASon < uzunEMASon) {
-            sinyal = "SAT";
+            sinyal = "SAT"; // Kısa EMA, uzun EMA'yı aşağı kesiyor
         }
 
         return sinyal;
