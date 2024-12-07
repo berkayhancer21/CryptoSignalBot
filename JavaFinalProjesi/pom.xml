@@ -11,6 +11,7 @@
 
     <dependencies>
         <!-- Binance API Connector -->
+        <!-- https://mvnrepository.com/artifact/io.github.binance/binance-connector-java -->
         <dependency>
             <groupId>io.github.binance</groupId>
             <artifactId>binance-connector-java</artifactId>
@@ -19,11 +20,12 @@
 
 
 
+
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.28</version>
+            <version>8.0.33</version>
         </dependency>
 
 
@@ -64,7 +66,7 @@
             <version>6.9.7.1</version>
         </dependency>
 
-        <dependency>
+
 
 
 
