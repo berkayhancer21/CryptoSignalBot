@@ -35,27 +35,38 @@ JavaFinalProjesi/
 ├── README.md                       # Proje dokümantasyonu
 ```
 
-
 ## **Özellikler**
-Binance API Entegrasyonu:
 
-Binance üzerinden kripto parite verilerini alma (OHLCV verileri).
-Anlık piyasa verilerini çekme.
-Teknik Analiz Stratejileri:
+### **1. Binance API Entegrasyonu**
+- **Kripto Parite Verilerini Alma:**
+  - Binance üzerinden OHLCV (Open, High, Low, Close, Volume) verilerini çekme.
+- **Anlık Piyasa Verileri:**
+  - Belirlenen kripto paritelerinin güncel piyasa bilgilerini alma.
 
-EMA9/EMA21: 9 ve 21 günlük üstel hareketli ortalamalar.
-MACD: Hareketli ortalamalar yakınsama/ıraksama göstergesi.
-Momentum: Fiyat değişim hızını hesaplama.
-RSI: Göreceli Güç Endeksi.
-Stochastic: Stokastik osilatör.
-BollingerBands_StochasticRSI: Bollinger Bantları ile Stokastik RSI kombinasyonu.
-Telegram Bildirimleri:
+### **2. Teknik Analiz Stratejileri**
+- **EMA9/EMA21:**
+  - 9 ve 21 günlük üstel hareketli ortalamalar ile al/sat sinyalleri üretir.
+- **MACD (Moving Average Convergence Divergence):**
+  - Hareketli ortalamalar yakınsama/ıraksama göstergesi ile trend analizi yapar.
+- **Momentum:**
+  - Fiyat değişim hızını hesaplar ve al/sat sinyalleri oluşturur.
+- **RSI (Relative Strength Index):**
+  - Göreceli Güç Endeksi ile aşırı alım ve aşırı satım bölgelerini tespit eder.
+- **Stochastic Oscillator:**
+  - Stokastik osilatör kullanarak piyasa trendlerini analiz eder.
+- **BollingerBands & StochasticRSI:**
+  - Bollinger Bantları ve Stokastik RSI kombinasyonu ile piyasa analizleri yapar.
 
-Strateji sonuçlarını Telegram mesajı olarak gönderme.
-MariaDB Veritabanı Desteği:
+### **3. Telegram Bildirimleri**
+- **Anlık Mesaj Gönderimi:**
+  - Teknik analiz stratejilerinin sonuçlarını Telegram üzerinden mesaj olarak gönderir.
 
-Strateji sonuçlarını kaydetme.
-Tüm işlemlerin veritabanında tutulması.
+### **4. MariaDB Veritabanı Desteği**
+- **Sonuçların Kaydedilmesi:**
+  - Teknik analiz stratejilerinden üretilen al/sat sinyallerini veritabanına kaydeder.
+- **Verilerin Saklanması:**
+  - Tüm işlemleri veritabanında tutarak daha sonra erişim ve analiz sağlar.
+
 
 
 
