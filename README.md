@@ -74,13 +74,72 @@ JSON: Binance API’den alınan verilerin işlenmesi için.
 
 ## **Kurulum**
 
-### 1. Projeyi Klonlayın
+## *** Projeyi Klonlayın***
 ```bash
 git clone https://github.com/kullaniciAdi/JavaFinalProjesi.git
 cd JavaFinalProjesi
 
 mvn install
+```    
 
+
+## **Bağımlılıkları Yükleyin**
+```bash
+mvn install
+```
+
+
+## ***application.properties Dosyasını Düzenleyin***
+
+src/main/resources/application.properties dosyasını açın ve Binance API anahtarlarınızı ve MariaDB bağlantı bilgilerinizi doldurun:
+
+```bash
+binance.apiKey=YOUR_BINANCE_API_KEY
+binance.secretKey=YOUR_BINANCE_SECRET_KEY
+
+db.url=jdbc:mysql://HOSTNAME:PORT/DB_NAME
+db.username=YOUR_DB_USERNAME
+db.password=YOUR_DB_PASSWORD
+
+telegram.botToken=YOUR_TELEGRAM_BOT_TOKEN
+telegram.chatId=YOUR_TELEGRAM_CHAT_ID
+```
+
+## ***Kullanım***
+
+1. Projeyi Çalıştırma
+Proje aşağıdaki komutla çalıştırılabilir:
+```bash
+mvn exec:java -Dexec.mainClass="com.cryptobot.Main"
+```
+
+2. Çalışma Süreci
+  Binance API’den parite verileri alınır.
+  Teknik analiz stratejileri çalıştırılır:
+    EMA9/EMA21
+    MACD
+    Momentum
+    RSI
+    Stochastic
+    BollingerBands & StochasticRSI
+    Strateji sonuçları:
+    Telegram’a gönderilir.
+    MariaDB veritabanına kaydedilir.
+
+
+## ***Stratejiler***
+
+EMA9_EMA21: 9 günlük ve 21 günlük üstel hareketli ortalamalara göre al/sat sinyali üretir.
+
+MACD: Hareketli ortalamalar yakınsama/ıraksama göstergesine göre sinyal üretir.
+
+Momentum: Fiyat değişim hızını hesaplar ve sinyal üretir.
+
+RSI: Göreceli Güç Endeksine göre aşırı alım/aşırı satım sinyalleri üretir.
+
+Stochastic: Stokastik osilatör kullanılarak sinyal üretir.
+
+BollingerBands_StochasticRSI: Bollinger Bantları ve Stokastik RSI kombinasyonu ile sinyal üretir.
 
 
 
