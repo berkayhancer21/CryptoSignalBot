@@ -36,7 +36,7 @@ JavaFinalProjesi/
 
 
 
-Özellikler
+## **Özellikler**
 Binance API Entegrasyonu:
 
 Binance üzerinden kripto parite verilerini alma (OHLCV verileri).
