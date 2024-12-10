@@ -36,3 +36,28 @@ JavaFinalProjesi/
 
 
 
+Özellikler
+Binance API Entegrasyonu:
+
+Binance üzerinden kripto parite verilerini alma (OHLCV verileri).
+Anlık piyasa verilerini çekme.
+Teknik Analiz Stratejileri:
+
+EMA9/EMA21: 9 ve 21 günlük üstel hareketli ortalamalar.
+MACD: Hareketli ortalamalar yakınsama/ıraksama göstergesi.
+Momentum: Fiyat değişim hızını hesaplama.
+RSI: Göreceli Güç Endeksi.
+Stochastic: Stokastik osilatör.
+BollingerBands_StochasticRSI: Bollinger Bantları ile Stokastik RSI kombinasyonu.
+Telegram Bildirimleri:
+
+Strateji sonuçlarını Telegram mesajı olarak gönderme.
+MariaDB Veritabanı Desteği:
+
+Strateji sonuçlarını kaydetme.
+Tüm işlemlerin veritabanında tutulması.
+
+
+
+
+
