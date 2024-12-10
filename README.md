@@ -33,7 +33,7 @@ JavaFinalProjesi/
 ├── .gitignore                      # Git tarafından izlenmeyecek dosyalar
 ├── pom.xml                         # Maven yapılandırma dosyası
 ├── README.md                       # Proje dokümantasyonu
-
+```
 
 
 ## **Özellikler**
@@ -56,6 +56,32 @@ MariaDB Veritabanı Desteği:
 
 Strateji sonuçlarını kaydetme.
 Tüm işlemlerin veritabanında tutulması.
+
+
+
+
+
+## ***Kullanılan Teknolojiler***
+Java: Projenin ana programlama dili.
+Maven: Proje yapılandırma ve bağımlılık yönetimi.
+Binance API: Kripto para piyasa verilerini almak için.
+MariaDB: Strateji sonuçlarını saklamak için veritabanı.
+Telegram API: Sinyal sonuçlarını anlık bildirim olarak göndermek için.
+JSON: Binance API’den alınan verilerin işlenmesi için.
+
+
+
+
+## **Kurulum**
+
+### 1. Projeyi Klonlayın
+```bash
+git clone https://github.com/kullaniciAdi/JavaFinalProjesi.git
+cd JavaFinalProjesi
+
+mvn install
+
+
 
 
 
