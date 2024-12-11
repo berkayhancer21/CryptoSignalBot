@@ -107,13 +107,6 @@ src/main/resources/application.properties dosyasını açın ve Binance API anah
 ```bash
 binance.apiKey=YOUR_BINANCE_API_KEY
 binance.secretKey=YOUR_BINANCE_SECRET_KEY
-
-db.url=jdbc:mysql://HOSTNAME:PORT/DB_NAME
-db.username=YOUR_DB_USERNAME
-db.password=YOUR_DB_PASSWORD
-
-telegram.botToken=YOUR_TELEGRAM_BOT_TOKEN
-telegram.chatId=YOUR_TELEGRAM_CHAT_ID
 ```
 
 ## ***Kullanım***
