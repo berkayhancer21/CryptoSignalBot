@@ -4,15 +4,14 @@ import java.util.*;
 
 public class PariteYonetimi {
 
-    public static Map<String, Map<String, String>> processSymbol(
-            String symbol, BinanceAPIClient apiClient, String interval, int limit) {
+    public static Map<String, Map<String, String>> processSymbol(String symbol, BinanceAPIClient apiClient, String interval, int limit) {
 
         Map<String, Map<String, String>> strategyResults = new LinkedHashMap<>();
         try {
             // Market verisini al
             String marketData = apiClient.getMarketData(symbol, interval, limit);
 
-            // Market verisini işlemeye gönder
+            // Market verisini işle
             List<Double> closePrices = BinanceConfig.processClosePrices(marketData);
             List<Double> highPrices = BinanceConfig.processHighPrices(marketData);
             List<Double> lowPrices = BinanceConfig.processLowPrices(marketData);

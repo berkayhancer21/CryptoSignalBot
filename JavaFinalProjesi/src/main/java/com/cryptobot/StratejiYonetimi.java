@@ -13,8 +13,8 @@ import java.util.concurrent.*;
 public class StratejiYonetimi {
 
     public static Map<String, String> calistirStratejiler(List<Double> closePrices, List<Double> highPrices, List<Double> lowPrices) throws InterruptedException, ExecutionException {
-        // Strateji sonuçlarını tutacak map
-        Map<String, String> strategies = new HashMap<>();
+
+        Map<String, String> strategies = new LinkedHashMap<>();
 
         // Bir thread havuzu oluşturuluyor. Havuz boyutu, strateji sayısına sayısına eşit olacak şekilde ayarlanır
         ExecutorService strategyExecutor = Executors.newFixedThreadPool(6);

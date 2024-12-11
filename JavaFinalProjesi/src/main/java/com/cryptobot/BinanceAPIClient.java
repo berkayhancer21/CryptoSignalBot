@@ -11,9 +11,6 @@ public class BinanceAPIClient {
 
     // Binance API istemcisini oluştur
     public BinanceAPIClient(String apiKey, String secretKey) {
-        Map<String, String> config = new HashMap<>();
-        config.put("API_KEY", apiKey);
-        config.put("SECRET_KEY", secretKey);
         this.client = new SpotClientImpl(apiKey, secretKey);
     }
 

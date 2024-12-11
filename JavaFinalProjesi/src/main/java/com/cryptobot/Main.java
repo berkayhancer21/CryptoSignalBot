@@ -6,15 +6,13 @@ import java.util.concurrent.*;
 public class Main {
 
     public static void main(String[] args) {
-        // BinanceConfig sınıfından API anahtarları alınır
+
         BinanceConfig binanceConfig = new BinanceConfig();
         String apiKey = binanceConfig.getApiKey();
         String secretKey = binanceConfig.getSecretKey();
 
-        // Binance API client oluşturulur
         BinanceAPIClient apiClient = new BinanceAPIClient(apiKey, secretKey);
 
-        // Telegram botu ile mesaj gönderme için bir nesne oluşturur
         TelegramConfig telegramBot = new TelegramConfig();
 
         // İzlenecek pariteler belirlenir
@@ -22,7 +20,6 @@ public class Main {
         String interval = "1h";
         int limit = 1000;
 
-        // Mariadb veritabanına strateji loglarını kaydetmek  için bir nesne oluşturur
         MariadbConfig dbConfig = new MariadbConfig();
 
         // Bir thread havuzu oluşturuluyor. Havuz boyutu, izlenecek parite sayısına eşit olacak şekilde ayarlanır
@@ -39,7 +36,6 @@ public class Main {
                     // Strateji sonuçlarını al
                     Map<String, String> strategies = strategyResults.get(symbol);
 
-                    // Sonuçları formatlı şekilde yazdır
                     String result = symbol + "\n"
                             + "EMA9_EMA21_Stratejisi: " + strategies.get("EMA9_EMA21_Stratejisi") + "\n"
                             + "MACD_EMA_Stratejisi: " + strategies.get("MACD_EMA_Stratejisi") + "\n"
@@ -50,10 +46,8 @@ public class Main {
 
                     System.out.println(result);
 
-                    // Telegram'a gönder
                     telegramBot.sendToTelegram(result);
 
-                    // Veritabanına ekle
                     for (Map.Entry<String, String> entry : strategies.entrySet()) {
                         String strategyName = entry.getKey();
                         String signalType = entry.getValue();
@@ -75,7 +69,6 @@ public class Main {
 
         System.out.println("Tüm pariteler işlendi ve veritabanına kaydedildi.");
 
-        // Uygulamayı sonlandır
         System.exit(0);
 
     }

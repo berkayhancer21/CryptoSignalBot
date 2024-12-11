@@ -6,17 +6,16 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class MariadbConfig {
-    // Veritabanı bağlantı bilgileri
-    private static final String DB_URL = "jdbc:mysql://157.173.104.238:3306/TradeBot"; // Veritabanı URL
-    private static final String DB_USER = "balabi4359"; // Kullanıcı adı
-    private static final String DB_PASSWORD = "Aliolkac4310*"; // Şifre
 
-    // Veritabanı bağlantısı kurma metodu
+    private static final String DB_URL = "jdbc:mysql://157.173.104.238:3306/TradeBot";
+    private static final String DB_USER = "balabi4359";
+    private static final String DB_PASSWORD = "Aliolkac4310*";
+
     private Connection connect() throws SQLException {
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
     }
 
-    // Log eklemek için kullanılan metot
+    // Veritabanına log eklemek için kullanılan metot
     public void insertLog(String symbol, String strategyName, String signalType) {
         String query = "INSERT INTO strateji_log_tablosu (symbol, strategy_name, signal_type, date) VALUES (?, ?, ?, DATE_ADD(NOW(), INTERVAL 2 HOUR))";
 
