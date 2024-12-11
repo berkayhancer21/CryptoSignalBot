@@ -25,10 +25,10 @@ public class Main {
         // Mariadb veritabanına strateji loglarını kaydetmek  için bir nesne oluşturur
         MariadbConfig dbConfig = new MariadbConfig();
 
-        // Eş zamanlı programlama için ExecutorService kullanımı
-        ExecutorService executorService = Executors.newFixedThreadPool(symbols.size()); // Parite sayısı kadar thread(iş parçacığı) oluşturulur
+        // Bir thread havuzu oluşturuluyor. Havuz boyutu, izlenecek parite sayısına eşit olacak şekilde ayarlanır
+        ExecutorService executorService = Executors.newFixedThreadPool(symbols.size());
 
-        // Parite başına işlem yap
+        //  Pariteleri işlemek için bir CompletableFuture listesi oluşturulur
         List<CompletableFuture<Void>> futures = new ArrayList<>();
         for (String symbol : symbols) {
             CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {

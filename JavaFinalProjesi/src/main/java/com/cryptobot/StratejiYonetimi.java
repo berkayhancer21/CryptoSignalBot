@@ -16,8 +16,8 @@ public class StratejiYonetimi {
         // Strateji sonuçlarını tutacak map
         Map<String, String> strategies = new HashMap<>();
 
-        // Strateji çalıştırma işlemleri için ExecutorService ve Future listesi oluştur
-        ExecutorService strategyExecutor = Executors.newFixedThreadPool(7);
+        // Bir thread havuzu oluşturuluyor. Havuz boyutu, strateji sayısına sayısına eşit olacak şekilde ayarlanır
+        ExecutorService strategyExecutor = Executors.newFixedThreadPool(6);
         List<Future<String>> strategyFutures = new ArrayList<>();
 
         // EMA9_EMA21 Stratejisi
