@@ -5,14 +5,26 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import java.util.Properties;
+import java.io.InputStream;
 
 public class TelegramConfig extends TelegramLongPollingBot {
 
-    private final String botToken = "8090075523:AAFQjIbrpD2icdsudSYaLWAAj2obFJ__XRI";
-    private final String chatId = "-4692179703";
+    private Properties properties;
 
-    // Telegram botunu oluştur
+    // application.properties dosyasını oku
     public TelegramConfig() {
+        properties = new Properties();
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream("application.properties")) {
+            if (input == null) {
+                System.out.println("application.properties bulunamadı!");
+                return;
+            }
+            properties.load(input);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
             botsApi.registerBot(this);
@@ -21,10 +33,17 @@ public class TelegramConfig extends TelegramLongPollingBot {
         }
     }
 
-    // Telegram'a mesaj gönder
+    private String getPropBotToken() {
+        return properties.getProperty("telegram.botToken");
+    }
+
+    private String getPropChatId() {
+        return properties.getProperty("telegram.chatId");
+    }
+
     public void sendToTelegram(String message) {
         SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(chatId);
+        sendMessage.setChatId(getPropChatId());
         sendMessage.setText(message);
 
         try {
@@ -34,22 +53,18 @@ public class TelegramConfig extends TelegramLongPollingBot {
         }
     }
 
-    // Telegram API'ye bağlanması için kullanılan token bilgisini döndürür
     @Override
     public String getBotToken() {
-        return botToken;
+        return getPropBotToken();
     }
 
-    // Telegram bot kullanıcı adını yazmaya yarar
     @Override
     public String getBotUsername() {
-        return "YourBotUsername";
+        return "CryptoSignalBot";
     }
 
-    // Telegram botunun güncellemelerini alır
     @Override
     public void onUpdateReceived(org.telegram.telegrambots.meta.api.objects.Update update) {
-        // Gelen mesajları işlemek için kullanılan bir metottur
+        // Gelen mesajları işlemek için bir metot
     }
-
 }
