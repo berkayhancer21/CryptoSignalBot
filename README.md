@@ -105,8 +105,19 @@ mvn install
 src/main/resources/application.properties dosyasını açın ve Binance API anahtarlarınızı ve MariaDB bağlantı bilgilerinizi doldurun:
 
 ```bash
-binance.apiKey=YOUR_BINANCE_API_KEY
-binance.secretKey=YOUR_BINANCE_SECRET_KEY
+# Binance API Keys
+binance.apiKey=YOUR_API_KEY
+binance.secretKey=YOUR_SECRET_KEY
+
+# Database Configuration
+db.url=YOUR_DB_URL
+db.user=YOUR_DB_USER
+db.password=YOUR_DB_PASSWORD
+
+# Telegram Configuration
+telegram.botToken=YOUR_TELEGRAM_BOT_TOKEN
+telegram.chatId=YOUR_TELEGRAM_CHAT_ID
+
 ```
 
 ## ***Kullanım***
